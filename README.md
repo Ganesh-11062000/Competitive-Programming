@@ -228,3 +228,62 @@ void countingSort(int arr[], int aux[], int sortedArray[], int n)
     }
 }
 ```
+
+# Dynamic Programming
+
+#### DP problems are categorized into two types:
+1. Optimization [ maximize or minimize a function ]
+2. Combinatorial [ find number of ways to do something ]  
+
+#### Steps to follow:
+1. find a recurrence relation
+2. find the base case 
+3. fill the 1-d or 2-d DP table [ aka memoization ]
+
+#### DP problems can be 1-D or 2-D. How to decide?
+1. try to think of a recursive solution
+2. note down how many parameters are changing 
+3. convert Recursive code (top-down) to DP solution (bottom-up)
+
+#### 1-D DP problem - <br>
+find the number of different ways to write N as the sum of 1, 3 and 4.<br>
+step 1: Recurrence relation
+```
+DP[n] = DP[n-1] + DP[n-3] + DP[n-4]
+```
+step 2: Base case
+```
+DP[0] = DP[1] = DP[2] = 1, DP[3] = 2
+```
+step 3: fill the 1-D DP table
+```
+for(i = 4; i <= N; i++) 
+{
+    DP[i] = DP[i-1] + DP[i-3] + DP[i-4];
+}
+return DP[N]
+```
+
+#### 2-D DP problem - <br/>
+finding the number of ways to reach a particular position from a given starting point in a 2-D grid <br>
+Step 1: Recurrence relation
+```
+MinCost(i,j) = min(MinCost(i-1,j),MinCost(i,j-1)) + Cost[i][j]
+```
+Step 2: Base case
+```
+MinCost(0,j) = MinCost(0,j-1) + Cost[0][j]
+MinCost(i,0) = MinCost(i-1,0) + Cost[i][0]
+```
+Step 3: fill the 2-D table
+```
+for(i = 1; i < X;i++)
+{
+    for(j = 1;j < Y;j++)
+    {
+	MinCost[i][j] = min(MinCost[i-1][j],MinCost[i][j-1]) + Cost[i][j];
+    }
+}
+return DP[X-1][Y-1]
+```
+
